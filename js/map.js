@@ -31,7 +31,7 @@ function initialize() {
                         '<div class="iw-content-text">'  +
                             '<i class="material-icons" > person </i>' + ' ' + data.samples[i].contacts[0] + '<br>' +
                             '<i class="material-icons"> email </i>' + ' ' + '<a href="mailto:' + data.samples[i].contacts[1] + '">' +  data.samples[i].contacts[1] + '</a> <br>' +
-                            '<i class="material-icons"> link </i>' + ' ' + '<a href="' + data.samples[i].contacts[2] + '">' +  data.samples[i].contacts[2] + '</a>' +
+                            '<i class="material-icons"> link </i>' + ' ' + '<a href="https://www.' + data.samples[i].contacts[2] + '">' +  data.samples[i].contacts[2] + '</a>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
