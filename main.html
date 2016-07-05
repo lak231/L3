@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href = "css/style.css" rel = "stylesheet" type = "text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <script src="js/jquery-3.0.0.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhm7bwU_oXyDE840qBKqT_M3XOqV3FYQQ&sensor=false&libraries=places"></script>
+    <title> Living Learning Lab </title>
+</head>
+<body>
+    <div id = "sidepanel">
+        <div id = "logo">
+            <a href="main.html"><img src="image/logo.png" onmouseover="this.src='image/logo-text.png'" onmouseout="this.src='image/logo.png'" width=100%/></a>
+        </div>
+
+        <button class="accordion">search</button>
+        <div class="panel">
+            <div id="search">
+                <input id="aSearch" type="search" placeholder="Search..." required>
+                <input type="button" value="Search" onclick="search()">
+            </div>
+        </div>
+
+        <button class="accordion">about the project</button>
+            <div class="panel">
+            <p>The strategic planning committee focusing on the topic of Living Learning Labs (L3) is  requesting your participation in this survey.  Living Learning Lab is defined as using Bucknell or the local community as a place for real world problem solving.  The integration into the classroom could be an exercise, module, course project, or even a capstone experience that enables students to apply principles they have learned to the local setting.  This immersion into real projects can both engage students while solving and addressing real world needs throughout the local community.  </p>
+        </div>
+
+    </div>
+
+    <div id="map"></div>
+
+    <script src="js/map.js"> </script>
+</body>
+</html>
