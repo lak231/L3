@@ -85,6 +85,7 @@ for (k = 0; k < acc.length; k++) {
 }
 
 function search () {
+    infoWindow.close();
     var input = document.getElementById("aSearch").value;
     console.log(input.length);
     if (input.length > 0) {
