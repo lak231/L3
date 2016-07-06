@@ -4,6 +4,9 @@ var infoWindow = new google.maps.InfoWindow({content: ""});
 var bucknell = new google.maps.LatLng(40.955384, -76.884941);
 var acc = document.getElementsByClassName("accordion");
 
+/*
+ * Initiate map, markers and infoWindow
+ */
 function initialize() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: bucknell,
@@ -12,7 +15,7 @@ function initialize() {
 
     $.getJSON("pubs.json", function(data) {
         for (i = 0; i < data.samples.length; i++) {
-            var content = (function () {return myString = '<div id="iw-container">' +
+            var content = (function () {myString = '<div id="iw-container">' +
                 '<div class="iw-header">' +
                     '<div class="iw-image"> <img src="image/test-image.jpg"> </div>' +
                     '<div class="iw-header-text">' +
@@ -35,15 +38,18 @@ function initialize() {
                         '</div>' +
                     '</div>' +
                 '</div>' +
-                '<div class="iw-tags">' +
-                    '<span style="background-color: #e76124; color: #eeeff7; padding: .2em;">' + data.samples[i].category[0] + '</span>' +
-                '</div>' +
-                '</div>';})();
+                '<div class="iw-tags">';
+                for (j = 0; j <data.samples[i].tags.length; j++) {
+                    myString += '<span style="background-color: #e76124; color: #eeeff7; padding-top: .2em; padding-left: .4em; padding-bottom: .2em; padding-right: .4em;">' + data.samples[i].tags[j] + '</span>' + " ";
+                }
+                myString += '</divi> </div>';
+                return myString;})();
 
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(data.samples[i].lat, data.samples[i].long),
                 title: data.samples[i].title,
-                category: data.samples[i].category
+                tags: data.samples[i].tags,
+                researchers: data.samples[i].researchers
             });
 
             marker.setMap(map);
@@ -77,6 +83,9 @@ $(document).ready(function () {
 });
 */
 
+/*
+ * Accordation
+ */
 for (k = 0; k < acc.length; k++) {
     acc[k].onclick = function(){
         this.classList.toggle("active");
@@ -84,25 +93,40 @@ for (k = 0; k < acc.length; k++) {
     }
 }
 
+/*
+ * Search for titles (tags and authors)
+ */
 function search () {
     infoWindow.close();
     var input = document.getElementById("aSearch").value;
     console.log(input.length);
     if (input.length > 0) {
         for (i = 0; i < markers.length; i++) {
+            markers[i].setVisible(false);
             if (markers[i].title.toLowerCase().indexOf(input.toLowerCase()) > -1) {
                 markers[i].setVisible(true);
-            } else {
-                markers[i].setVisible(false);
             }
-        }
-    } else {
-        for (i = 0; i < markers.length; i++) {
-            markers[i].setVisible(true);
+            if (markers[i].researchers.toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                markers[i].setVisible(true);
+            }
+            for (j = 0; j < markers[i].tags.length; j++) {
+                if (markers[i].tags[j].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                    markers[i].setVisible(true);
+                }
+            }
         }
     }
 }
 
+function resetSearch() {
+    for (i = 0; i < markers.length; i++) {
+        markers[i].setVisible(true);
+    }
+}
+
+/*
+ * Always focus on the map
+ */
 $("map").on('blur', function () {
     setTimeout(function () {
         this.focus();

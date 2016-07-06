@@ -36,6 +36,10 @@ nav {
 	margin: 0;
 }
 
+/*
+ * InfoWindow styling
+ */
+
 #iw-container .iw-content {
 	height: 160px;
 }
@@ -48,6 +52,7 @@ nav {
 #iw-container .iw-contacts {
 	width: 35%;
 	float: right;
+	text-wrap: break;
 }
 #iw-container {
 	font-family: "Roboto", sans-serif;
@@ -102,6 +107,14 @@ nav {
 	font-size: 14px;
 	padding-top: 15px;
 }
+
+#iw-container .iw-tags {
+	padding-top: 15px;
+}
+
+/*
+ * Accordation styling
+ */
 button.accordion {
 	background-color: #1C1D21;
 	color: #eeeff7;
@@ -159,3 +172,4 @@ form {
 .material-icons {
 	vertical-align: middle;
 }
+
