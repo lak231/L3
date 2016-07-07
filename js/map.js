@@ -34,7 +34,7 @@ function initialize() {
                         '<div class="iw-content-text">'  +
                             '<i class="material-icons" > person </i>' + ' ' + data.samples[i].contacts[0] + '<br>' +
                             '<i class="material-icons"> email </i>' + ' ' + '<a href="mailto:' + data.samples[i].contacts[1] + '">' +  data.samples[i].contacts[1] + '</a> <br>' +
-                            '<i class="material-icons"> link </i>' + ' ' + '<a href="https://www.' + data.samples[i].contacts[2] + '">' +  data.samples[i].contacts[2] + '</a>' +
+                            '<i class="material-icons"> link </i>' + ' ' + '<a href="' + data.samples[i].contacts[2] + '">' +  data.samples[i].contacts[2] + '</a>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -68,30 +68,13 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-/*
-$(document).ready(function () {
-    $('div.tags').find('input:checkbox').on('click', function () {
-        $('div.tags').find('input:checked').each(function () {
-            if (infoWindow.category[0] == $(this).attr('rel')) {
-                marker.setVisible(true);
-            }
-            else {
-                marker.setVisible(false);
-            }
-        });
-    });
-});
-*/
 
-/*
- * Accordation
- */
-for (k = 0; k < acc.length; k++) {
-    acc[k].onclick = function(){
-        this.classList.toggle("active");
-        this.nextElementSibling.classList.toggle("show");
-    }
-}
+$(document).ready(function () {
+    $("#searchIcon").on('click', function () {
+        search();
+    })
+});
+
 
 /*
  * Search for titles (tags and authors)
@@ -99,28 +82,27 @@ for (k = 0; k < acc.length; k++) {
 function search () {
     infoWindow.close();
     var input = document.getElementById("aSearch").value;
-    console.log(input.length);
     if (input.length > 0) {
         for (i = 0; i < markers.length; i++) {
-            markers[i].setVisible(false);
+            markers[i].setOpacity(0.4);
             if (markers[i].title.toLowerCase().indexOf(input.toLowerCase()) > -1) {
-                markers[i].setVisible(true);
+                markers[i].setOpacity(1);
             }
             if (markers[i].researchers.toLowerCase().indexOf(input.toLowerCase()) > -1) {
-                markers[i].setVisible(true);
+                markers[i].setOpacity(1);
             }
             for (j = 0; j < markers[i].tags.length; j++) {
                 if (markers[i].tags[j].toLowerCase().indexOf(input.toLowerCase()) > -1) {
-                    markers[i].setVisible(true);
+                    markers[i].setOpacity(1);
                 }
             }
         }
     }
 }
 
-function resetSearch() {
-    for (i = 0; i < markers.length; i++) {
-        markers[i].setVisible(true);
+function handle(event) {
+    if (event.keyCode === 13)  {
+        search();
     }
 }
 

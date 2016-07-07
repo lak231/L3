@@ -10,22 +10,20 @@
 </head>
 <body>
     <div id = "sidepanel">
-        <div id = "logo">
-            <a href="main.html"><img src="image/logo.png" onmouseover="this.src='image/logo-text.png'" onmouseout="this.src='image/logo.png'" width=100%/></a>
-        </div>
-
-        <button class="accordion">search</button>
-        <div class="panel">
-            <div id="search">
-                <input id="aSearch" type="search" placeholder="Search for titles, researchers, or tags..." required>
-                <input type="button" value="Search" onclick="search()">
-                <input type="button" value="Reset" onclick="resetSearch()">
+        <div id="header">
+            <div id = "logo">
+                <a href="main.html"><img src="image/logo.png" onmouseover="this.src='image/logo-text.png'" onmouseout="this.src='image/logo.png'" width=100%/></a>
+            </div>
+            <div id="description">
+                <p>The strategic planning committee focusing on the topic of Living Learning Labs (L3) is  requesting your participation in this survey.  Living Learning Lab is defined as using Bucknell or the local community as a place for real world problem solving.  The integration into the classroom could be an exercise, module, course project, or even a capstone experience that enables students to apply principles they have learned to the local setting.  This immersion into real projects can both engage students while solving and addressing real world needs throughout the local community.  </p>
             </div>
         </div>
 
-        <button class="accordion">about the project</button>
-            <div class="panel">
-            <p>The strategic planning committee focusing on the topic of Living Learning Labs (L3) is  requesting your participation in this survey.  Living Learning Lab is defined as using Bucknell or the local community as a place for real world problem solving.  The integration into the classroom could be an exercise, module, course project, or even a capstone experience that enables students to apply principles they have learned to the local setting.  This immersion into real projects can both engage students while solving and addressing real world needs throughout the local community.  </p>
+        <div class="panel">
+            <div id="search">
+                <a href="#" onclick="search()" id="searchIcon"> <i class="material-icons"> search </i> </a>
+                <input id="aSearch" type="search" onkeypress="handle(event)" placeholder="Search for titles, researchers, or tags..." required>
+            </div>
         </div>
 
     </div>
