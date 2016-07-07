@@ -10,10 +10,10 @@ var acc = document.getElementsByClassName("accordion");
 function initialize() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: bucknell,
-        zoom: 15
+        zoom: 16
     });
 
-    $.getJSON("pubs.json", function(data) {
+    $.getJSON("projects.json", function(data) {
         for (i = 0; i < data.samples.length; i++) {
             var content = (function () {myString = '<div id="iw-container">' +
                 '<div class="iw-header">' +
@@ -40,7 +40,7 @@ function initialize() {
                 '</div>' +
                 '<div class="iw-tags">';
                 for (j = 0; j <data.samples[i].tags.length; j++) {
-                    myString += '<span style="background-color: #e76124; color: #eeeff7; padding-top: .2em; padding-left: .4em; padding-bottom: .2em; padding-right: .4em;">' + data.samples[i].tags[j] + '</span>' + " ";
+                    myString += '<span style="background-color: #e76124; color: #eeeff7; padding-top: .2em; padding-left: .4em; padding-bottom: .2em; padding-right: .4em; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;">' + data.samples[i].tags[j] + '</span>' + " ";
                 }
                 myString += '</divi> </div>';
                 return myString;})();
