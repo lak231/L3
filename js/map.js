@@ -17,7 +17,7 @@ function initialize() {
         for (i = 0; i < data.samples.length; i++) {
             var content = (function () {myString = '<div id="iw-container">' +
                 '<div class="iw-header">' +
-                    '<div class="iw-image"> <img src="image/test-image.jpg"> </div>' +
+                    '<div class="iw-image"> <img style="max-width: 100%; max-height: 100%;" src="' + data.samples[i].image + '"> </div>' +
                     '<div class="iw-header-text">' +
                         '<div class="iw-title">' + data.samples[i].title + '</div>' +
                         '<div class="iw-researchers">' + data.samples[i].researchers +  '</div>' +
@@ -32,15 +32,14 @@ function initialize() {
                     '<div class="iw-contacts">' +
                         '<div class="iw-subtitle"> Contacts</div>' +
                         '<div class="iw-content-text">'  +
-                            '<i class="material-icons" > person </i>' + ' ' + data.samples[i].contacts[0] + '<br>' +
-                            '<i class="material-icons"> email </i>' + ' ' + '<a href="mailto:' + data.samples[i].contacts[1] + '">' +  data.samples[i].contacts[1] + '</a> <br>' +
-                            '<i class="material-icons"> link </i>' + ' ' + '<a href="' + data.samples[i].contacts[2] + '">' +  data.samples[i].contacts[2] + '</a>' +
+                            '<i class="material-icons"> email </i>' + ' ' + '<a href="mailto:' + data.samples[i].contacts[1] + '">' +  data.samples[i].contacts[0] + '</a> <br>' +
+                            '<i class="material-icons"> link </i>' + ' ' + '<a href="' + data.samples[i].links[1] + '">' +  data.samples[i].links[0] + '</a>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
                 '<div class="iw-tags">';
                 for (j = 0; j <data.samples[i].tags.length; j++) {
-                    myString += '<span style="background-color: #e76124; color: #eeeff7; padding-top: .2em; padding-left: .4em; padding-bottom: .2em; padding-right: .4em; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;">' + data.samples[i].tags[j] + '</span>' + " ";
+                    myString += '<a href="#" class="tags" onclick="searchTags(\'' + data.samples[i].tags[j] + '\')">' + data.samples[i].tags[j] + '</a>' + " ";
                 }
                 myString += '</divi> </div>';
                 return myString;})();
@@ -49,7 +48,8 @@ function initialize() {
                 position: new google.maps.LatLng(data.samples[i].lat, data.samples[i].long),
                 title: data.samples[i].title,
                 tags: data.samples[i].tags,
-                researchers: data.samples[i].researchers
+                researchers: data.samples[i].researchers,
+                contacts: data.samples[i].contacts
             });
 
             marker.setMap(map);
@@ -75,6 +75,10 @@ $(document).ready(function () {
     })
 });
 
+function searchTags(input) {
+    document.getElementById("aSearch").value = input;
+    search();
+}
 
 /*
  * Search for titles (tags and authors)
@@ -84,15 +88,21 @@ function search () {
     var input = document.getElementById("aSearch").value;
     if (input.length > 0) {
         for (i = 0; i < markers.length; i++) {
+            console.log(markers[i].contacts[0]);
             markers[i].setOpacity(0.4);
             if (markers[i].title.toLowerCase().indexOf(input.toLowerCase()) > -1) {
                 markers[i].setOpacity(1);
             }
-            if (markers[i].researchers.toLowerCase().indexOf(input.toLowerCase()) > -1) {
+            for (j = 0; j < markers[i].researchers.length; j++) {
+                if (markers[i].researchers[j].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                    markers[i].setOpacity(1);
+                }
+            }
+            if (markers[i].contacts[0].toLowerCase().indexOf(input.toLowerCase()) > -1) {
                 markers[i].setOpacity(1);
             }
-            for (j = 0; j < markers[i].tags.length; j++) {
-                if (markers[i].tags[j].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+            for (k = 0; k < markers[i].tags.length; k++) {
+                if (markers[i].tags[k].toLowerCase().indexOf(input.toLowerCase()) > -1) {
                     markers[i].setOpacity(1);
                 }
             }

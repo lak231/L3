@@ -191,3 +191,16 @@ form {
 	-o-transform:scale(1.5); /* Opera */
 	transform:scale(1.5);
 }
+
+a.tags{
+	background-color: #e76124;
+	color: #eeeff7;
+	padding-top: .2em;
+	padding-left: .4em;
+	padding-bottom: .2em;
+	padding-right: .4em;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	text-decoration: none;
+}

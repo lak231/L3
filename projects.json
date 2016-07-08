@@ -1,55 +1,43 @@
 {
   "samples": [{
+    "image": "image/test-image.jpg",
     "tags": ["Conference", "Music"],
-    "researchers": "Eun Youb Lee, Beste Yuksel, Daniel Afergan, Samuel W. Hincks, Tomoki Shibata, Erin Solovey, A.J. Jenkins, Kurt B. Oleson, Lane Harrison, Evan M. Peck, Remco Chang, Robert J.K. Jacob",
+    "researchers": ["Eun Youb Lee", "Beste Yuksel", "Daniel Afergan", "Samuel W. Hincks", "Tomoki Shibata", "Erin Solovey", "A.J. Jenkins", "Kurt B. Oleson", "Lane Harrison", "Evan M. Peck", "Remco Chang", "Robert J.K. Jacob"],
     "title": "Learn Piano with BACh: An Adaptive Learning Interface that Adjusts Task Difficulty based on Brain State",
     "summary": "We present Brain Automated Chorales (BACh), an adaptive brain-computer system that dynamically increases the levels of difficulty in a musical learning task based on pianists’ cognitive workload measured by functional near-infrared spectroscopy.",
-    "contacts": [
-      "Prof. Evan M. Peck", "emp017@bucknell.edu",
-      "eg.bucknell.edu/~emp017/"
-    ],
+    "contacts": ["Prof. Evan M. Peck", "emp017@bucknell.edu"],
+    "links": ["BACh", "https://eg.bucknell.edu/~emp017/"],
     "lat": 40.955384,
     "long": -76.884941
   }, {
+    "image": "image/bookworm.png",
     "tags": ["Computer Science", "Mobile"],
-    "researchers": "Son Pham, Cristal Hermosillo, Joe Duvall, Melissa Rios",
+    "researchers": ["Son Pham", "Cristal Hermosillo", "Joe Duvall", "Melissa Rios"],
     "title": "Bookworm",
     "summary": "Bookworm is an iOS app built in CSCI 379: Human-Computer Interaction. For any college student, searching for material is blah blah blah blah blah blah blah blah blah blah blah blah.",
-    "contacts": [
-      "Prof. Evan M. Peck", "emp017@bucknell.edu",
-      "medium.com/@melissarios94/bookworm-final-review-574ea8af33be#.76bbecuty"
-    ],
+    "contacts": ["Prof. Evan M. Peck", "emp017@bucknell.edu"],
+    "links": ["Bookworm", "https://medium.com/@melissarios94/bookworm-final-review-574ea8af33be#.76bbecuty" ],
     "lat": 40.954320,
     "long": -76.882665
   }, {
+    "image": "image/parkme.png",
     "tags": ["Computer Science", "Mobile"],
-    "researchers": "AC Li, Alice Shen, Drew Taylor, Luis Felipe Tomazini",
+    "researchers": ["AC Li", "Alice Shen", "Drew Taylor", "Luis Felipe Tomazini"],
     "title": "ParkMe",
     "summary": "ParkMe is an iOS app built in CSCI 379: Human-Computer Interaction. The ParkMe design prototype is built to crowdsource GPS data from cars to estimate whether parking is available in different lots over the course of the day.",
-    "contacts": [
-      "Prof. Evan M. Peck", "emp017@bucknell.edu",
-      "https://medium.com/@lftomazini/parkme-e784bc2d30b1#.qqr2v2o7g"
-    ],
+    "contacts": ["Prof. Evan M. Peck", "emp017@bucknell.edu"],
+    "links": ["Parkme", "https://medium.com/@lftomazini/parkme-e784bc2d30b1#.qqr2v2o7g"],
     "lat": 40.952411,
     "long": -76.881221
   }, {
+    "image": "image/bos.png",
     "tags": ["Computer Science", "Mobile"],
-    "researchers": "Ken Stephon, Ravi Lonberg, Nick Hale, John Simmons",
+    "researchers": ["Ken Stephon", "Ravi Lonberg", "Nick Hale", "John Simmons"],
     "title": "Bison Ordering System (BOS)",
     "summary": "BOS is an iPad app built in CSCI 379: Human-Computer Interaction. The BOS design prototype is meant to replace, ease, and expedite the paper ordering system that currently exists at the Bison Grill",
-    "contacts": [
-      "Prof. Evan M. Peck", "emp017@bucknell.edu",
-      "https://medium.com/@kjs026/bos-the-bison-ordering-system-5568a3199eef#.z855mzxkw"
-    ],
+    "contacts": ["Prof. Evan M. Peck", "emp017@bucknell.edu"],
+    "links": ["BOS", "https://medium.com/@kjs026/bos-the-bison-ordering-system-5568a3199eef#.z855mzxkw"],
     "lat": 40.956461,
     "long": -76.884784
-  }, {
-    "tags": ["Test1", "Test2"],
-    "researchers": "Test",
-    "title": "Test",
-    "summary": "Test",
-    "contacts": "Test",
-    "lat": 41.955384,
-    "long": -77.884941
   }]
 }
