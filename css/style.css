@@ -204,3 +204,8 @@ a.tags{
 	border-radius: 5px;
 	text-decoration: none;
 }
+
+#popularTags {
+	padding-top: 15%;
+	line-height: 200%;
+}

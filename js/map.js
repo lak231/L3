@@ -1,5 +1,6 @@
 ﻿var map;
 var markers = [];
+var sortedTags = [];
 var infoWindow = new google.maps.InfoWindow({content: ""});
 var bucknell = new google.maps.LatLng(40.955384, -76.884941);
 var acc = document.getElementsByClassName("accordion");
@@ -40,6 +41,7 @@ function initialize() {
                 '<div class="iw-tags">';
                 for (j = 0; j <data.samples[i].tags.length; j++) {
                     myString += '<a href="#" class="tags" onclick="searchTags(\'' + data.samples[i].tags[j] + '\')">' + data.samples[i].tags[j] + '</a>' + " ";
+                    sortedTags.push(data.samples[i].tags[j]);
                 }
                 myString += '</divi> </div>';
                 return myString;})();
@@ -63,6 +65,17 @@ function initialize() {
 
             markers.push(marker);
         }
+
+        var myString = '';
+        var current = "5dPubGOsxiJZB2sea4JK"; //random string
+        sortedTags.sort();
+        for (i = 0; i < sortedTags.length; i++) {
+            if (sortedTags[i].indexOf(current) == -1) {
+                current = sortedTags[i];
+                myString += '<a href="#" class="tags" onclick="searchTags(\'' + sortedTags[i] + '\')">' + sortedTags[i] + '</a>' + " ";
+            }
+        }
+        document.getElementById("popularTags").innerHTML = myString;
     });
 }
 
@@ -74,6 +87,7 @@ $(document).ready(function () {
         search();
     })
 });
+
 
 function searchTags(input) {
     document.getElementById("aSearch").value = input;
