@@ -29,7 +29,7 @@ function initialize() {
                         '<div class="iw-title">' + data.samples[i].title + '</div>' +
                         '<div class="iw-tags">';
                         for (j = 0; j <data.samples[i].tags.length; j++) {
-                            myString += '<a href="#" class="tags in" onclick="searchTags(\'' + data.samples[i].tags[j] + '\')">' + data.samples[i].tags[j] + '</a>' + " ";
+                            myString += '<a class="tags in" onclick="searchTags(\'' + data.samples[i].tags[j] + '\')">' + data.samples[i].tags[j] + '</a>' + " ";
                             sortedTags.push(data.samples[i].tags[j]);
                         }
                         myString += '</div>' + //tags
@@ -85,7 +85,7 @@ function initialize() {
         for (i = 0; i < sortedTags.length; i++) {
             if (sortedTags[i].indexOf(current) == -1) {
                 current = sortedTags[i];
-                myString += '<a href="#" class="tags out" onclick="searchTags(\'' + sortedTags[i] + '\')">' + sortedTags[i] + '</a>' + " ";
+                myString += '<a class="tags out" onclick="searchTags(\'' + sortedTags[i] + '\')">' + sortedTags[i] + '</a>' + " ";
             }
         }
         document.getElementById("popularTags").innerHTML = myString;
@@ -95,11 +95,23 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
+
 $(document).ready(function () {
     $("#searchIcon").on('click', function () {
         search();
-    })
+    });
+    $("#sidepanel-toggle").on('click', function () {
+        toggleSidePanel();
+    });
 });
+
+function toggleSidePanel () {
+    if($("#sidepanel").hasClass('active')) {
+        $("#sidepanel").removeClass('active');
+    } else {
+        $("#sidepanel").addClass('active');
+    }
+}
 
 function searchTags(input) {
     document.getElementById("aSearch").value = input;
@@ -110,6 +122,9 @@ function searchTags(input) {
  * Search for titles (tags and authors)
  */
 function search () {
+    if($("#sidepanel").hasClass('active')) {
+        $("#sidepanel").removeClass('active');
+    }
     infoWindow.close();
     var input = document.getElementById("aSearch").value;
     if (input.length > 0) {
@@ -146,6 +161,7 @@ $(document).keyup(function(e) {
         for (i = 0; i < markers.length; i++) {
             markers[i].setOpacity(1);
         }
+        toggleSidePanel();
     }
 });
 

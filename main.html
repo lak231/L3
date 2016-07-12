@@ -10,7 +10,8 @@
     <script src="js/map.js"> </script>
 </head>
 <body>
-    <div id = "sidepanel">
+    <div id = "sidepanel" class="active">
+        <button type="button" id="sidepanel-toggle"><i class="material-icons">menu</i></button>
         <div id="header">
             <div id = "logo">
                 <a href="main.html"><img src="image/logo.png" width=100%/></a>
@@ -23,7 +24,7 @@
 
         <div class="panel">
             <div id="search">
-                <a href="#" onclick="search()" id="searchIcon"> <i class="material-icons"> search </i> </a>
+                <a onclick="search()" id="searchIcon"> <i class="material-icons"> search </i> </a>
                 <label>
                     <input id="aSearch" type="search" onkeypress="handle(event)" placeholder="Search for titles, researchers, or tags..." required>
                 </label>
@@ -33,11 +34,11 @@
             </div>
 
         </div>
-
+        <footer>
+            <a href="http://goo.gl/forms/172JYJC1KJLtQzr13" id="feedback" target="_blank"> <i class="material-icons"> announcement </i> </a>
+        </footer>
     </div>
     <div id="map"></div>
-    <footer>
-        <a href="http://goo.gl/forms/172JYJC1KJLtQzr13" id="feedback" target="_blank"> <i class="material-icons"> announcement </i> </a>
-    </footer>
+
 </body>
 </html>
