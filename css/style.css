@@ -26,19 +26,24 @@ body,  html {
 	background-color: #1C1D21;
 	height: calc(100vh - 60px);
 	width: 490px;
-	float: left;
+	min-height: 830px;
+	position: absolute;
 	vertical-align: middle;
 	text-align: left;
 	font-family: "Open Sans", sans-serif;
 	color: #eeeff7;
-	z-index: 3;
 }
 
 #map {
+	left: 550px;
 	height: 100vh;
+	min-height: 890px;
+	position: absolute;
 	width: calc(100% - 550px);
+	min-width: 890px;
 	float: right;
 	margin: 0;
+	overflow: hidden;
 }
 
 /*
@@ -245,7 +250,6 @@ form {
 
 footer {
 	position: fixed;
-	z-index: 5;
 	bottom: 0;
 	left: 30px;
 	width: 100%;
