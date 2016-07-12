@@ -1,6 +1,6 @@
 {
   "samples": [{
-    "image": "image/test-image.jpg",
+    "image": "",
     "tags": ["Conference", "Music"],
     "researchers": ["Eun Youb Lee", "Beste Yuksel", "Daniel Afergan", "Samuel W. Hincks", "Tomoki Shibata", "Erin Solovey", "A.J. Jenkins", "Kurt B. Oleson", "Lane Harrison", "Evan M. Peck", "Remco Chang", "Robert J.K. Jacob"],
     "title": "Learn Piano with BACh: An Adaptive Learning Interface that Adjusts Task Difficulty based on Brain State",

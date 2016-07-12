@@ -5,24 +5,28 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <script src="js/jquery-3.0.0.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhm7bwU_oXyDE840qBKqT_M3XOqV3FYQQ&sensor=false&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhm7bwU_oXyDE840qBKqT_M3XOqV3FYQQ&sensor=false&libraries=places" ></script>
     <title> Living Learning Lab</title>
+    <script src="js/map.js"> </script>
 </head>
 <body>
     <div id = "sidepanel">
         <div id="header">
             <div id = "logo">
-                <a href="main.html"><img src="image/logo.png" onmouseover="this.src='image/logo-text.png'" onmouseout="this.src='image/logo.png'" width=100%/></a>
+                <a href="main.html"><img src="image/logo.png" width=100%/></a>
             </div>
             <div id="description">
-                <p>The strategic planning committee focusing on the topic of Living Learning Labs (L3) is  requesting your participation in this survey.  Living Learning Lab is defined as using Bucknell or the local community as a place for real world problem solving.  The integration into the classroom could be an exercise, module, course project, or even a capstone experience that enables students to apply principles they have learned to the local setting.  This immersion into real projects can both engage students while solving and addressing real world needs throughout the local community.  </p>
+                <p style="font-family: 'Oswald', sans-serif; font-style: normal; font-size: 34px;"> LIVING LEARNING LAB</p>
+                <p> The Living Learning Lab represents student experiences that use Bucknell or the local community as a place for real world problem solving. These experiences are built into the classroom through an exercise, module, course project, or even capstone experience that enables students to apply principles that they have learned to the local setting. This immersion into the campus and community both engages students and addresses real world needs throughout the local community. </p>
             </div>
         </div>
 
         <div class="panel">
             <div id="search">
                 <a href="#" onclick="search()" id="searchIcon"> <i class="material-icons"> search </i> </a>
-                <input id="aSearch" type="search" onkeypress="handle(event)" placeholder="Search for titles, researchers, or tags..." required>
+                <label>
+                    <input id="aSearch" type="search" onkeypress="handle(event)" placeholder="Search for titles, researchers, or tags..." required>
+                </label>
             </div>
 
             <div id="popularTags">
@@ -31,9 +35,9 @@
         </div>
 
     </div>
-
     <div id="map"></div>
-
-    <script src="js/map.js"> </script>
+    <footer>
+        <a href="http://goo.gl/forms/172JYJC1KJLtQzr13" id="feedback" target="_blank"> <i class="material-icons"> announcement </i> </a>
+    </footer>
 </body>
 </html>

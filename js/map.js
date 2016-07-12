@@ -18,32 +18,45 @@ function initialize() {
         for (i = 0; i < data.samples.length; i++) {
             var content = (function () {myString = '<div id="iw-container">' +
                 '<div class="iw-header">' +
-                    '<div class="iw-image"> <img style="max-width: 100%; max-height: 100%;" src="' + data.samples[i].image + '"> </div>' +
+                    '<div class="iw-image">';
+                    if (data.samples[i].image === "") {
+                        myString += '<img style="max-width: 100%; max-height: 100%;" src="image/logo.png">';
+                    } else {
+                        myString += '<img style="max-width: 100%; max-height: 100%;" src="' + data.samples[i].image + '">';
+                    }
+                    myString += '</div>' + //image
                     '<div class="iw-header-text">' +
                         '<div class="iw-title">' + data.samples[i].title + '</div>' +
-                        '<div class="iw-researchers">' + data.samples[i].researchers +  '</div>' +
-                    '</div>' +
-                '</div>' +
+                        '<div class="iw-tags">';
+                        for (j = 0; j <data.samples[i].tags.length; j++) {
+                            myString += '<a href="#" class="tags in" onclick="searchTags(\'' + data.samples[i].tags[j] + '\')">' + data.samples[i].tags[j] + '</a>' + " ";
+                            sortedTags.push(data.samples[i].tags[j]);
+                        }
+                        myString += '</div>' + //tags
+                        '<div class="iw-researchers">';
+                        for (k = 0; k < data.samples[i].researchers.length; k++) {
+                            if (k < data.samples[i].researchers.length - 1) {
+                                myString += '<a href="#" class="iw-researchers-link" onclick="searchTags(\'' + data.samples[i].researchers[k] + '\')">' + data.samples[i].researchers[k] + '</a>' + ", ";
+                            } else {
+                                myString += '<a href="#" class="iw-researchers-link" onclick="searchTags(\'' + data.samples[i].researchers[k] + '\')">' + data.samples[i].researchers[k] + '</a>';
+                            }
+                        }
+                        myString +=
+                        '</div>' + //researchers
+                    '</div>' + //header-text
+                '</div>' + //header
                 '<div class = "iw-content"> ' +
                     '<div class="iw-summary">' +
-                        '<div class="iw-subtitle"> Summary </div>' +
                         '<div class="iw-content-text">' + data.samples[i].summary + '</div>' +
                     '</div>' +
 
                     '<div class="iw-contacts">' +
-                        '<div class="iw-subtitle"> Contacts</div>' +
                         '<div class="iw-content-text">'  +
-                            '<i class="material-icons"> email </i>' + ' ' + '<a href="mailto:' + data.samples[i].contacts[1] + '">' +  data.samples[i].contacts[0] + '</a> <br>' +
-                            '<i class="material-icons"> link </i>' + ' ' + '<a href="' + data.samples[i].links[1] + '">' +  data.samples[i].links[0] + '</a>' +
+                                '<a class="iw-icon" href="mailto:' + data.samples[i].contacts[1] + '"><i class="material-icons iw"> email </i></a>' + ' ' +  data.samples[i].contacts[0] + '<br>' +
+                                '<a class="iw-icon" target="_blank" href="' + data.samples[i].links[1] + '"><i class="material-icons iw"> link </i></a>' +  ' ' + data.samples[i].links[0] +
                         '</div>' +
                     '</div>' +
-                '</div>' +
-                '<div class="iw-tags">';
-                for (j = 0; j <data.samples[i].tags.length; j++) {
-                    myString += '<a href="#" class="tags" onclick="searchTags(\'' + data.samples[i].tags[j] + '\')">' + data.samples[i].tags[j] + '</a>' + " ";
-                    sortedTags.push(data.samples[i].tags[j]);
-                }
-                myString += '</divi> </div>';
+                '</div> </div>';
                 return myString;})();
 
             var marker = new google.maps.Marker({
@@ -72,7 +85,7 @@ function initialize() {
         for (i = 0; i < sortedTags.length; i++) {
             if (sortedTags[i].indexOf(current) == -1) {
                 current = sortedTags[i];
-                myString += '<a href="#" class="tags" onclick="searchTags(\'' + sortedTags[i] + '\')">' + sortedTags[i] + '</a>' + " ";
+                myString += '<a href="#" class="tags out" onclick="searchTags(\'' + sortedTags[i] + '\')">' + sortedTags[i] + '</a>' + " ";
             }
         }
         document.getElementById("popularTags").innerHTML = myString;
@@ -88,7 +101,6 @@ $(document).ready(function () {
     })
 });
 
-
 function searchTags(input) {
     document.getElementById("aSearch").value = input;
     search();
@@ -102,7 +114,6 @@ function search () {
     var input = document.getElementById("aSearch").value;
     if (input.length > 0) {
         for (i = 0; i < markers.length; i++) {
-            console.log(markers[i].contacts[0]);
             markers[i].setOpacity(0.4);
             if (markers[i].title.toLowerCase().indexOf(input.toLowerCase()) > -1) {
                 markers[i].setOpacity(1);
@@ -129,6 +140,14 @@ function handle(event) {
         search();
     }
 }
+
+$(document).keyup(function(e) {
+    if (e.keyCode === 27) {
+        for (i = 0; i < markers.length; i++) {
+            markers[i].setOpacity(1);
+        }
+    }
+});
 
 /*
  * Always focus on the map
