@@ -27,11 +27,12 @@ body,  html {
 	height: calc(100vh - 60px);
 	width: 490px;
 	min-height: 830px;
-	position: absolute;
+	position: fixed;
 	vertical-align: middle;
 	text-align: left;
 	font-family: "Open Sans", sans-serif;
 	color: #eeeff7;
+	z-index: 10;
 }
 
 #map {
