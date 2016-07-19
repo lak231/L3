@@ -122,9 +122,6 @@ function searchTags(input) {
  * Search for titles (tags and authors)
  */
 function search () {
-    if($("#sidepanel").hasClass('active')) {
-        $("#sidepanel").removeClass('active');
-    }
     infoWindow.close();
     var input = document.getElementById("aSearch").value;
     if (input.length > 0) {
@@ -161,6 +158,7 @@ $(document).keyup(function(e) {
         for (i = 0; i < markers.length; i++) {
             markers[i].setOpacity(1);
         }
+        document.getElementById("aSearch").value = "";
         toggleSidePanel();
     }
 });

@@ -1,15 +1,5 @@
 {
   "samples": [{
-    "image": "",
-    "tags": ["Conference", "Music"],
-    "researchers": ["Eun Youb Lee", "Beste Yuksel", "Daniel Afergan", "Samuel W. Hincks", "Tomoki Shibata", "Erin Solovey", "A.J. Jenkins", "Kurt B. Oleson", "Lane Harrison", "Evan M. Peck", "Remco Chang", "Robert J.K. Jacob"],
-    "title": "Learn Piano with BACh: An Adaptive Learning Interface that Adjusts Task Difficulty based on Brain State",
-    "summary": "We present Brain Automated Chorales (BACh), an adaptive brain-computer system that dynamically increases the levels of difficulty in a musical learning task based on pianists’ cognitive workload measured by functional near-infrared spectroscopy.",
-    "contacts": ["Prof. Evan M. Peck", "emp017@bucknell.edu"],
-    "links": ["BACh", "https://eg.bucknell.edu/~emp017/"],
-    "lat": 40.955384,
-    "long": -76.884941
-  }, {
     "image": "image/bookworm.png",
     "tags": ["Computer Science", "Mobile"],
     "researchers": ["Son Pham", "Cristal Hermosillo", "Joe Duvall", "Melissa Rios"],
