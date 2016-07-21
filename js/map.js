@@ -3,7 +3,7 @@ var markers = [];
 var sortedTags = [];
 var infoWindow = new google.maps.InfoWindow({content: ""});
 var bucknell = new google.maps.LatLng(40.955384, -76.884941);
-var acc = document.getElementsByClassName("accordion");
+var json = "https://drive.google.com/uc?export=download&id=0B01XgsZSqU8GRFVRZVl1bnJDTk0"
 
 /*
  * Initiate map, markers and infoWindow
@@ -14,7 +14,7 @@ function initialize() {
         zoom: 16
     });
 
-    $.getJSON("projects.json", function(data) {
+    $.getJSON(json, function(data) {
         for (i = 0; i < data.samples.length; i++) {
             var content = (function () {myString = '<div id="iw-container">' +
                 '<div class="iw-header">' +
@@ -28,7 +28,7 @@ function initialize() {
                     '<div class="iw-header-text">' +
                         '<div class="iw-title">' + data.samples[i].title + '</div>' +
                         '<div class="iw-tags">';
-                        for (j = 0; j <data.samples[i].tags.length; j++) {
+                        for (j = 0; j < data.samples[i].tags.length; j++) {
                             myString += '<a class="tags in" onclick="searchTags(\'' + data.samples[i].tags[j] + '\')">' + data.samples[i].tags[j] + '</a>' + " ";
                             sortedTags.push(data.samples[i].tags[j]);
                         }
@@ -51,16 +51,25 @@ function initialize() {
                     '</div>' +
 
                     '<div class="iw-contacts">' +
-                        '<div class="iw-content-text">'  +
-                                '<a class="iw-icon" href="mailto:' + data.samples[i].contacts[1] + '"><i class="material-icons iw"> email </i></a>' + ' ' +  data.samples[i].contacts[0] + '<br>' +
-                                '<a class="iw-icon" target="_blank" href="' + data.samples[i].links[1] + '"><i class="material-icons iw"> link </i></a>' +  ' ' + data.samples[i].links[0] +
+                        '<div class="iw-content-text">';
+                                if (data.samples[i].contacts.length == 1) {
+                                    myString += '<a class="iw-icon" href="mailto:' + data.samples[i].contacts[0] + '"><i class="material-icons iw"> email </i></a>' + ' Email <br>';
+                                } else {
+                                    myString += '<a class="iw-icon" href="mailto:' + data.samples[i].contacts[1] + '"><i class="material-icons iw"> email </i></a>' + ' ' +  data.samples[i].contacts[0] + '<br>';
+                                }
+                                if (data.samples[i].links.length == 1) {
+                                    myString += '<a class="iw-icon" target="_blank" href="' + data.samples[i].links[0] + '"><i class="material-icons iw"> link </i></a>' +  ' Link';
+                                } else {
+                                    myString += '<a class="iw-icon" target="_blank" href="' + data.samples[i].links[1] + '"><i class="material-icons iw"> link </i></a>' +  ' ' + data.samples[i].links[0];
+                                    }
+                        myString +=
                         '</div>' +
                     '</div>' +
                 '</div> </div>';
                 return myString;})();
 
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(data.samples[i].lat, data.samples[i].long),
+                position: new google.maps.LatLng(data.samples[i].location[0], data.samples[i].location[1]),
                 title: data.samples[i].title,
                 tags: data.samples[i].tags,
                 researchers: data.samples[i].researchers,

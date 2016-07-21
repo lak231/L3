@@ -83,7 +83,7 @@ body,  html {
  */
 
 #iw-container .iw-content {
-	height: 160px;
+	max-height: 160px;
 }
 
 #iw-container .iw-summary {
@@ -108,7 +108,7 @@ body,  html {
 }
 
 #iw-container .iw-header {
-	height: 160px;
+	max-height: 160px;
 }
 
 #iw-container .iw-image {
