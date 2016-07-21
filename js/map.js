@@ -11,7 +11,7 @@ var json = "https://drive.google.com/uc?export=download&id=0B01XgsZSqU8GRFVRZVl1
 function initialize() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: bucknell,
-        zoom: 16
+        zoom: 15
     });
 
     $.getJSON(json, function(data) {
