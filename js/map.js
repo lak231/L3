@@ -1,9 +1,10 @@
 ﻿var map;
 var markers = [];
 var sortedTags = [];
+var areas = {};
 var infoWindow = new google.maps.InfoWindow({content: ""});
 var bucknell = new google.maps.LatLng(40.955384, -76.884941);
-var json = "https://drive.google.com/uc?export=download&id=0B01XgsZSqU8GRFVRZVl1bnJDTk0"
+var json = "https://drive.google.com/uc?export=download&id=0B01XgsZSqU8GRFVRZVl1bnJDTk0";
 
 /*
  * Initiate map, markers and infoWindow
@@ -14,7 +15,33 @@ function initialize() {
         zoom: 15
     });
 
+    $.getJSON("json/areas.json", function(stuff) {
+        var myString = "";
+        for (i = 0; i < stuff.areas.length; i++) {
+            var paths = [];
+            for (j = 0; j < stuff.areas[i].coords.length; j++) {
+                paths.push(new google.maps.LatLng(stuff.areas[i].coords[j][1], stuff.areas[i].coords[j][0]));
+            }
+            console.log(paths);
+            var newShape = new google.maps.Polygon({
+                paths: paths,
+                strokeColor: '#FF5E17',
+                strokeOpacity: 1,
+                strokeWeight: 1.5,
+                fillColor: '#FF5E17',
+                fillOpacity: 0.1,
+                visible: false
+            });
+            newShape.setMap(map);
+            areas[stuff.areas[i].name] = newShape;
+            myString += '<a class="tags out" onclick="viewArea(\'' + stuff.areas[i].name + '\')">' + stuff.areas[i].name + '</a>' + " ";
+        }
+        document.getElementById("areas").innerHTML = myString;
+    });
+
+
     $.getJSON(json, function(data) {
+        console.log("this is stupid");
         for (i = 0; i < data.samples.length; i++) {
             var content = (function () {myString = '<div id="iw-container">' +
                 '<div class="iw-header">' +
@@ -151,6 +178,25 @@ function search () {
                 if (markers[i].tags[k].toLowerCase().indexOf(input.toLowerCase()) > -1) {
                     markers[i].setOpacity(1);
                 }
+            }
+        }
+    }
+}
+
+function viewArea(input) {
+    var found;
+    for (var key in areas) {
+        areas[key].setVisible(false);
+        if (key == input) {
+            areas[key].setVisible(true);
+            found =  areas[input];
+        }
+    }
+    if (found) {
+        for (i = 0; i < markers.length; i++) {
+            markers[i].setOpacity(0.4);
+            if (google.maps.geometry.poly.containsLocation(markers[i].getPosition(), found)) {
+                markers[i].setOpacity(1);
             }
         }
     }

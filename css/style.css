@@ -226,6 +226,7 @@ body,  html {
 	border-color: #eeeff7;
 	border: solid 1px;
 	cursor: pointer;
+	overflow-y: scroll;
 }
 
 .tags.in {
@@ -243,6 +244,12 @@ body,  html {
 .tags.in:hover{
 	color: white;
 }
+
+#areas {
+	padding-top: 32px;
+	line-height: 200%;
+}
+
 #popularTags {
 	padding-top: 32px;
 	line-height: 200%;
