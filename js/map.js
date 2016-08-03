@@ -4,7 +4,6 @@ var sortedTags = [];
 var areas = {};
 var infoWindow = new google.maps.InfoWindow({content: ""});
 var bucknell = new google.maps.LatLng(40.955384, -76.884941);
-var json = "https://drive.google.com/uc?export=download&id=0B01XgsZSqU8GRFVRZVl1bnJDTk0";
 
 /*
  * Initiate map, markers and infoWindow
@@ -22,7 +21,6 @@ function initialize() {
             for (j = 0; j < stuff.areas[i].coords.length; j++) {
                 paths.push(new google.maps.LatLng(stuff.areas[i].coords[j][1], stuff.areas[i].coords[j][0]));
             }
-            console.log(paths);
             var newShape = new google.maps.Polygon({
                 paths: paths,
                 strokeColor: '#FF5E17',
@@ -40,8 +38,7 @@ function initialize() {
     });
 
 
-    $.getJSON(json, function(data) {
-        console.log("this is stupid");
+    $.getJSON("json/projects.json", function(data) {
         for (i = 0; i < data.samples.length; i++) {
             var content = (function () {myString = '<div id="iw-container">' +
                 '<div class="iw-header">' +
@@ -49,7 +46,7 @@ function initialize() {
                     if (data.samples[i].image === "") {
                         myString += '<img style="max-width: 100%; max-height: 100%;" src="image/logo.png">';
                     } else {
-                        myString += '<img style="max-width: 100%; max-height: 100%;" src="' + data.samples[i].image + '">';
+                        myString += '<img style="max-width: 100%; max-height: 100%;" src="image/' + data.samples[i].image + '">';
                     }
                     myString += '</div>' + //image
                     '<div class="iw-header-text">' +
@@ -193,6 +190,12 @@ function viewArea(input) {
         }
     }
     if (found) {
+        var bounds = new google.maps.LatLngBounds();
+        var coordArray = found.getPath().getArray();
+        for (i = 0; i < coordArray.length; i++) {
+            bounds.extend(coordArray[i]);
+        }
+        map.fitBounds(bounds);
         for (i = 0; i < markers.length; i++) {
             markers[i].setOpacity(0.4);
             if (google.maps.geometry.poly.containsLocation(markers[i].getPosition(), found)) {
