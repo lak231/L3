@@ -1,0 +1,30 @@
+{
+  "samples" : [
+{
+      "Timestamp" : "2016-07-19T20:56:52.037Z",
+      "Username" : "sstumbri@bucknell.edu",
+      "title" : "Startup Lewisburg",
+      "summary" : "Startup Lewisburg, Bucknell University's Entrepreneurs Incubator, is the home for innovators in downtown Lewisburg; and features meetups, programs, consulting services, and exclusive networking opportunities for the region's entrepreneurship and startup community. Members of the incubator include tech startups from the area, firms featuring members of the Bucknell faculty, and student ventures from Bucknell's BizPitch competition.",
+      "tags" : [
+        "Entrepreneurship",
+        "startup",
+        "venture",
+        "business"
+      ],
+      "location" : [
+        40.963536,
+        -76.886545
+      ],
+      "contacts" : [
+        "sstumbri@bucknell.edu"
+      ],
+      "researchers" : [
+        "Dennis Hummer"
+      ],
+      "links" : [
+        "http://www.bucknell.edu/startuplewisburg"
+      ],
+      "image" :       "Cole_pitches_at_StartupLewisburg.jpg"
+
+    }
+  ]}
