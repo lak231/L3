@@ -4,6 +4,7 @@ var sortedTags = [];
 var areas = {};
 var infoWindow = new google.maps.InfoWindow({content: ""});
 var bucknell = new google.maps.LatLng(40.955384, -76.884941);
+var activeArea;
 
 /*
  * Initiate map, markers and infoWindow
@@ -32,7 +33,7 @@ function initialize() {
             });
             newShape.setMap(map);
             areas[stuff.areas[i].name] = newShape;
-            myString += '<a class="tags out" onclick="viewArea(\'' + stuff.areas[i].name + '\')">' + stuff.areas[i].name + '</a>' + " ";
+            myString += '<a class="tags area" onclick="viewArea(\'' + stuff.areas[i].name + '\')">' + stuff.areas[i].name + '</a>' + " ";
         }
         document.getElementById("areas").innerHTML = myString;
     });
@@ -147,8 +148,20 @@ function toggleSidePanel () {
 }
 
 function searchTags(input) {
-    document.getElementById("aSearch").value = input;
-    search();
+    if ($("a:contains('" + input + "')").hasClass('active')) {
+        $("a:contains('" + input + "')").removeClass('active');
+        document.getElementById("aSearch").value = "";
+        resetSearch();
+    } else {
+        document.getElementById("aSearch").value = input;
+        $(".tags.out").each(function () {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active")
+            }
+        });
+        $("a:contains('" + input + "')").addClass("active");
+        search();
+    }
 }
 
 /*
@@ -160,20 +173,41 @@ function search () {
     if (input.length > 0) {
         for (i = 0; i < markers.length; i++) {
             markers[i].setOpacity(0.4);
-            if (markers[i].title.toLowerCase().indexOf(input.toLowerCase()) > -1) {
-                markers[i].setOpacity(1);
-            }
-            for (j = 0; j < markers[i].researchers.length; j++) {
-                if (markers[i].researchers[j].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+            if (activeArea) {
+                if (google.maps.geometry.poly.containsLocation(markers[i].getPosition(), activeArea)) {
+                    if (markers[i].title.toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                        markers[i].setOpacity(1);
+                    }
+                    for (j = 0; j < markers[i].researchers.length; j++) {
+                        if (markers[i].researchers[j].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                            markers[i].setOpacity(1);
+                        }
+                    }
+                    if (markers[i].contacts[0].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                        markers[i].setOpacity(1);
+                    }
+                    for (k = 0; k < markers[i].tags.length; k++) {
+                        if (markers[i].tags[k].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                            markers[i].setOpacity(1);
+                        }
+                    }
+                }
+            } else {
+                if (markers[i].title.toLowerCase().indexOf(input.toLowerCase()) > -1) {
                     markers[i].setOpacity(1);
                 }
-            }
-            if (markers[i].contacts[0].toLowerCase().indexOf(input.toLowerCase()) > -1) {
-                markers[i].setOpacity(1);
-            }
-            for (k = 0; k < markers[i].tags.length; k++) {
-                if (markers[i].tags[k].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                for (j = 0; j < markers[i].researchers.length; j++) {
+                    if (markers[i].researchers[j].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                        markers[i].setOpacity(1);
+                    }
+                }
+                if (markers[i].contacts[0].toLowerCase().indexOf(input.toLowerCase()) > -1) {
                     markers[i].setOpacity(1);
+                }
+                for (k = 0; k < markers[i].tags.length; k++) {
+                    if (markers[i].tags[k].toLowerCase().indexOf(input.toLowerCase()) > -1) {
+                        markers[i].setOpacity(1);
+                    }
                 }
             }
         }
@@ -181,26 +215,50 @@ function search () {
 }
 
 function viewArea(input) {
-    var found;
-    for (var key in areas) {
-        areas[key].setVisible(false);
-        if (key == input) {
-            areas[key].setVisible(true);
-            found =  areas[input];
+    if ($("a:contains('" + input + "')").hasClass('active')) {
+        activeArea.setVisible(false);
+        activeArea = null;
+        $("a:contains('" + input + "')").removeClass('active');
+        map.setZoom(15);
+        map.setCenter(bucknell);
+    } else {
+        $(".tags.area").each(function () {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active")
+            }
+        });
+        $("a:contains('" + input + "')").addClass("active");
+        for (var key in areas) {
+            areas[key].setVisible(false);
+            if (key == input) {
+                areas[key].setVisible(true);
+                activeArea =  areas[input];
+            }
+        }
+        if (activeArea) {
+            var bounds = new google.maps.LatLngBounds();
+            var coordArray = activeArea.getPath().getArray();
+            for (i = 0; i < coordArray.length; i++) {
+                bounds.extend(coordArray[i]);
+            }
+            map.fitBounds(bounds);
+            for (i = 0; i < markers.length; i++) {
+                if (!google.maps.geometry.poly.containsLocation(markers[i].getPosition(), activeArea)) {
+                    markers[i].setOpacity(0.4);
+                }
+            }
         }
     }
-    if (found) {
-        var bounds = new google.maps.LatLngBounds();
-        var coordArray = found.getPath().getArray();
-        for (i = 0; i < coordArray.length; i++) {
-            bounds.extend(coordArray[i]);
+}
+
+function resetSearch() {
+    if(activeArea) {
+        if (google.maps.geometry.poly.containsLocation(markers[i].getPosition(), activeArea)) {
+            markers[i].setOpacity(1);
         }
-        map.fitBounds(bounds);
+    } else {
         for (i = 0; i < markers.length; i++) {
-            markers[i].setOpacity(0.4);
-            if (google.maps.geometry.poly.containsLocation(markers[i].getPosition(), found)) {
-                markers[i].setOpacity(1);
-            }
+            markers[i].setOpacity(1);
         }
     }
 }

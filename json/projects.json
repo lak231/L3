@@ -24,7 +24,30 @@
       "links" : [
         "http://www.bucknell.edu/startuplewisburg"
       ],
-      "image" :       "Cole_pitches_at_StartupLewisburg.jpg"
-
+      "images" : "Cole_pitches_at_StartupLewisburg.jpg"
+    },
+{
+      "Timestamp" : "2016-08-04T00:02:16.993Z",
+      "Username" : "cbl007@bucknell.edu",
+      "title" : "Upgrading the Drip Irrigation System ",
+      "summary" : " The goal of this project is to improve the drip irrigation system at the Lewisburg Community Garden. In the previous design, the materials used for this irrigation system is rigid and prone to breakage upon prolonged UV exposure. Additionally, the pipe is difficult to disassemble, reassemble, and transported for storage. By redesigning and reinstalling the system, the drip irrigation system will be more sustainable, user-friendly, and low maintenance.\n",
+      "tags" : [
+        "sustainability",
+        "gardening",
+        "food security"
+      ],
+      "location" : [
+        40.969096,
+        -76.883795
+      ],
+      "contacts" : [
+        "kwb004@bucknell.edu "
+      ],
+      "researchers" : [
+        "Chau Le"
+      ],
+      "links" : [
+      ],
+      "images" : ""
     }
   ]}
