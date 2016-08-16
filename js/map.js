@@ -253,8 +253,10 @@ function viewArea(input) {
 
 function resetSearch() {
     if(activeArea) {
-        if (google.maps.geometry.poly.containsLocation(markers[i].getPosition(), activeArea)) {
-            markers[i].setOpacity(1);
+        for (i = 0; i < markers.length; i++) {
+            if (google.maps.geometry.poly.containsLocation(markers[i].getPosition(), activeArea)) {
+                markers[i].setOpacity(1);
+            }
         }
     } else {
         for (i = 0; i < markers.length; i++) {
